@@ -1,6 +1,6 @@
 export class Validate {
 
-    static validate(obj, scheme){
+    static async validate(obj, scheme){
 
         for (let i of Object.keys(scheme)){
             if (!obj.hasOwnProperty(i)){
@@ -41,10 +41,40 @@ export class Validate {
                 return false;
             }
             // console.log(`validated property ${i}`)
+
+            if (i === 'dateOfBirth'){
+                if (!this.validateDate(obj[i])){
+                    return false;
+                }
+            }
+            if (i === 'email') {
+                if (!this.validateEmail(obj[i])){
+                    return false;
+                }
+            }
+            if (i === 'sex') {
+                if (!this.validateSex(obj[i])){
+                    return false;
+                }
+            }
         }
 
         return true;
 
+    }
+
+    static async validateDate(dateString){
+        return dateString.match(/\d{4}-([01])(\d)-\d{2}/);
+    }
+
+    static async validateEmail(emailString){
+        return emailString.match(/\w+@\w+\.\w+/);
+        // return true;
+    }
+
+    static async validateSex(sexString){
+        const booln = ((sexString === 'male') || (sexString === 'female'));
+        return booln;
     }
 
 }

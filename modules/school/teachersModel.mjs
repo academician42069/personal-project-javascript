@@ -7,7 +7,7 @@ export class TeachersModel {
         this.teacherMap = new Map();
     }
 
-     add(obj) {
+    async add(obj) {
         if (this.isTeacherValid(obj)) {
             const date = new Date();
             obj.id = obj.name.first + obj.name.last + String(60 * date.getTime());
@@ -19,7 +19,7 @@ export class TeachersModel {
         }
     }
 
-    isTeacherValid(obj) {
+    async isTeacherValid(obj) {
         const scheme = {
             "name": {
                 "first": "string",
@@ -46,9 +46,9 @@ export class TeachersModel {
                 }
             ],
             "description": "string",
-        }
+        };
 
-        return Validate.validate(obj, scheme);
+        return await Validate.validate(obj, scheme);
     }
 
      read(id){

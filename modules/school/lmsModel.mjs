@@ -4,7 +4,7 @@ export class LMSModel {
         this.subjMap = new Map();
     }
 
-    add(subject) {
+    async add(subject) {
         if (subject.id !== undefined){
             this.subjMap.set(subject.id, subject);
         }
@@ -13,7 +13,7 @@ export class LMSModel {
         }
     }
 
-    remove(subject) {
+    async remove(subject) {
         if (subject.id !== undefined){
             this.subjMap.delete(subject.id);
         }
@@ -22,7 +22,7 @@ export class LMSModel {
         }
     }
 
-    update(subject, update) {
+    async update(subject, update) {
         if (subject.id !== undefined){
             let tempSubj = this.subjMap.get(subject.id);
             Object.assign(tempSubj, update);
@@ -33,11 +33,11 @@ export class LMSModel {
         }
     }
 
-    verify(subject) {
+    async verify(subject) {
         return this.subjMap.has(subject.id);
     }
 
-    readAll() {
+    async readAll() {
         let tempArray = [];
         this.subjMap.forEach(value => {
             tempArray.push(value) 

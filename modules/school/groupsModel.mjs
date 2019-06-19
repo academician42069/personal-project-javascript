@@ -27,10 +27,25 @@ export class GroupsModel {
         this.pupilMap.set(pupil.id, pupil);
     }
 
+    // readPupil(groupID, pupilID){
+    //     const pupilGroup = this.groupMap.get(groupID);
+    //     if (typeof pupilGroup !== 'object'){
+    //         throw Error ('This group does not exist.')
+    //     }
+    //     if (typeof thisPupil !== 'object'){
+    //         throw Error ('This pupil does not exist.')
+    //     }
+    //     return this.pupilMap.get(pupilID);
+    // }
+
     removePupil(groupID, pupilID){
         const pupilGroup = this.groupMap.get(groupID);
+        const thisPupil = this.pupilMap.get(pupilID);
         if (typeof pupilGroup !== 'object'){
             throw Error ('This group does not exist.')
+        }
+        if (typeof thisPupil !== 'object'){
+            throw Error ('This pupil does not exist.')
         }
         this.pupilMap.delete(pupilID);
     }

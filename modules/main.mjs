@@ -94,6 +94,7 @@ const data = {
 };
 
 const teachers = new TeachersModel();
+
 const teacherId = teachers.add(data);
 console.log(teachers.read(teacherId));
 
@@ -156,7 +157,7 @@ const pupils = new PupilsModel();
 const pupilId = pupils.add(pupilData);
 
 // will return Pupils data including pupil's id
-console.log(pupils.read(pupilId));
+// console.log(pupils.read(pupilId));
 
 // will update Pupil. This method should use the same validation as a constructor method
 // pupil.update(pupilId, updatedProfile)
@@ -181,50 +182,52 @@ groups.update(groupId, {
 });
 
 // Read information about group
-// console.log(groups.read(groupId));
+console.log(groups.read(groupId));
 
 // It will return array of groups
 // console.log(groups.readAll());
 
 // Remove this pupil from this group (required pupil ID)
-groups.removePupil(groupId, pupilId);
+// groups.removePupil(groupId, pupilId);
 
 /* Gradebook */
 
 // const pupilId = pupil.id;
 // const teacherId = teacherId;
-// const gradebooks = new GradebooksModel(groups, teachers, lms);
+const gradebooks = new GradebooksModel(groups, teachers, lms);
 
 // Create a new gradebook
-// const level = 1;
-// const gradebook = gradebooks.add(level, group.id);
+const level = 1;
+const gradebookId = gradebooks.add(level, groupId);
 
-// Destroy all data inside this gradebook
-// gradebooks.clear();
+const record = {
+  pupilId: pupilId,
+  teacherId: teacherId,
+  subjectId: history.id,
+  lesson: 1,
+  mark: 9
+};
 
-// const record = {
-//   pupilId: pupilId,
-//   teacherId: teacherId,
-//   subjectId: history.id,
-//   lesson: 1,
-//   mark: 9
-// };
+gradebooks.addRecord(gradebookId, record);
 
-// gradebooks.addRecord(gradebookId, record);
+// Read information about oliver results
 
-// // Read information about oliver results
-// const oliver = gradebooks.read(gradebookId, pupilId);
-// // {
-// //   name: 'Oliver Black',
-// //   records: [
-// //     {
-// //       teacher: 'Elizabeth Holms',
-// //       subject: 'History',
-// //       lesson: 1,
-// //       mark: 9
-// //     }
-// //   ]
-// // }
+const rob = gradebooks.read(gradebookId, pupilId);
+
+// {
+//   name: 'Oliver Black',
+//   records: [
+//     {
+//       teacher: 'Elizabeth Holms',
+//       subject: 'History',
+//       lesson: 1,
+//       mark: 9
+//     }
+//   ]
+// }
 
 // // Read information about all students in this gradebook
 // const students = gradebooks.readAll(gradebookId); // It will return the array of objects
+
+// Destroy all data inside this gradebook
+// gradebooks.clear();
