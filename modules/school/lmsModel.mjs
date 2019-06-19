@@ -1,4 +1,5 @@
 export class LMSModel {
+
     constructor() {
         this.subjMap = new Map();
     }
